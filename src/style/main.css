@@ -33,12 +33,16 @@ div.searchBox {
     div.searchBox input:focus ~ label::after {
       border-bottom: 2px solid black;
       transform: scaleX(5) translate(40%, 2px); }
-  div.searchBox label::after {
-    content: '';
-    width: 20%;
-    display: block;
-    border-bottom: 2px solid rgba(0, 0, 0, 0);
-    transform: translate(200%, 2px);
-    transition: border-bottom 400ms ease, transform 400ms ease; }
+  div.searchBox label {
+    border-bottom: 2px solid rgba(0, 0, 0, 0); }
+    div.searchBox label::after {
+      content: '';
+      width: 20%;
+      display: block;
+      border-bottom: 2px solid rgba(0, 0, 0, 0);
+      transform: translate(200%, 2px);
+      transition: border-bottom 400ms ease, transform 400ms ease; }
+    div.searchBox label.active {
+      border-bottom: 2px solid black; }
 
 /*# sourceMappingURL=main.css.map */
