@@ -17,29 +17,29 @@ const debounce = (fn, delay) => {
     }
 }
 
-searchInput.addEventListener('keyup', debounce(e =>{
-    console.log(searchInput.value.length)
-    searchBox.classList.add('loadingItems')
-    if(searchInput.value.length === 0) {
-        searchInput.blur();
-        searchBox.classList.remove('loadingItems')
+searchInput.addEventListener('focus', () => {
+    searchBox.classList.add('moveToTop')
+})
 
-    }
-},1500))
+searchInput.addEventListener('keyup', debounce(e => {
+    let state = 1;
 
-// searchInput.addEventListener('keyup', () => {
-//
-//     let loading = true;
-//
-//     const inputValue = () => {
-//         const query = searchInput.value;
-//         console.log(query)
-//         loading = false
-//         //!loading ? searchBox.classList.add('itemsLoaded') : '';
-//     }
-//     //const query = searchInput.value
-//     //console.log(query)
-//     // fetch(`${api}search?q=${query}&media_type=image`)
+
+    let results = new Array();
+
+    fetch(`${api}search?q=${searchInput.value}&media_type=image`)
+        .then(res => res.json())
+        .then(response => {
+            console.log(response);
+            results = response.collection.items
+
+        })
+        .catch((err) => console.log(err));
+
+},1000))
+
+
+// fetch(`${api}search?q=${query}&media_type=image`)
 //     //     .then(res => res.json())
 //     //     .then(data => {
 //     //         itemsLoaded = true;
@@ -47,8 +47,3 @@ searchInput.addEventListener('keyup', debounce(e =>{
 //     //         console.log(data);
 //     //
 //     //     })
-//
-// })
-
-
-
