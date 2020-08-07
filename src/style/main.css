@@ -17,20 +17,12 @@ body {
 div.searchBox {
   display: flex;
   flex-direction: column;
-  width: 200px; }
-  div.searchBox.loadingItems {
+  width: 200px;
+  transition-property: transform, opacity; }
+  div.searchBox.moveToTop {
     align-self: flex-start;
-    margin-top: 30px;
-    transform: translateY(10px);
-    animation: fadeOut 250ms;
-    transition: transform 250ms ease; }
-@keyframes fadeOut {
-  0% {
-    opacity: 0; }
-  50% {
-    opacity: .5; }
-  100% {
-    opacity: 1; } }
+    animation: 400ms ease fadeIn;
+    transform: translateY(10vh); }
   div.searchBox input {
     border: none;
     padding: 5px 10px;
@@ -39,7 +31,6 @@ div.searchBox {
     cursor: default; }
     div.searchBox input::placeholder {
       text-align: center;
-      transition: opacity 500ms ease;
       color: #000; }
     div.searchBox input:focus {
       outline: none; }
@@ -56,8 +47,16 @@ div.searchBox {
       display: block;
       border-bottom: 2px solid rgba(0, 0, 0, 0);
       transform: translate(200%, 2px);
-      transition: border-bottom 400ms ease, transform 400ms ease; }
+      transition: border-bottom 300ms ease 50ms, transform 300ms ease 50ms; }
     div.searchBox label.active {
       border-bottom: 2px solid black; }
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(15vh);
+    opacity: 0; }
+  to {
+    transform: translateY(10vh);
+    opacity: 1; } }
 
 /*# sourceMappingURL=main.css.map */
