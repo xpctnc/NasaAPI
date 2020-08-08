@@ -2,6 +2,7 @@ const searchContainer = document.querySelector('.searchContainer')
 const search = document.querySelector('.search')
 const searchInput = document.querySelector('.searchInput')
 const searchInputBorder = document.querySelector('.searchInputBorder')
+const loader = document.querySelector('.lds')
 const results = document.querySelector('.results')
 
 searchInput.addEventListener('keyup', () => {
@@ -28,6 +29,7 @@ searchInput.addEventListener('focus', () => {
     searchContainer.classList.add('searchActive')
     search.classList.add('searchActive')
     searchInput.classList.add('searchActive')
+    loader.classList.add('searchActive')
 })
 
 const api = 'https://images-api.nasa.gov/'
@@ -52,9 +54,11 @@ searchInput.addEventListener('keyup', debounce(e => {
                     imageItem.style.backgroundImage = `url('${item.links[0].href}')`
                     results.appendChild(imageItem)
 
+
                 })
 
-                console.log(resultsArr.length)
+
+
 
             })
             .catch((err) => console.log(err));
