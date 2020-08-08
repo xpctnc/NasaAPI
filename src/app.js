@@ -17,34 +17,52 @@ const debounce = (fn, delay) => {
         timeOutId = setTimeout(() => fn(...args), delay);
     }
 }
+
+const removeAllChildNodes = el => {
+    while (el.firstChild) {
+        el.removeChild(el.firstChild);
+    }
+}
+
 searchInput.addEventListener('focus', () => {
-    search.classList.add('searchActive')
     searchContainer.classList.add('searchActive')
+    search.classList.add('searchActive')
+    searchInput.classList.add('searchActive')
 })
 
 const api = 'https://images-api.nasa.gov/'
-searchInput.focus();
 searchInput.addEventListener('keyup', debounce(e => {
-    let state = 1;
 
     let resultsArr = new Array();
 
-    fetch(`${api}search?q=${searchInput.value}&media_type=image`)
-        .then(response => response.json())
-        .then(response => {
-            console.log(response);
-            resultsArr = response.collection.items
-            console.log(resultsArr)
-            resultsArr.forEach(item => {
-                let imageItem = document.createElement('div')
-                imageItem.classList.add('item')
-                imageItem.style.backgroundImage = `url('${item.links[0].href}')`
-                //images.appendChild(imageItem)
-                console.log(`${item.links[0].href}`)
+    if(searchInput.value.length > 0) {
+        fetch(`${api}search?q=${searchInput.value}&media_type=image`)
+            .then(response => response.json())
+            .then(response => {
+                resultsArr = response.collection.items
+
+                console.log(resultsArr)
+
+                results.childNodes.length > 0 ? removeAllChildNodes(results) : '';
+
+                resultsArr.forEach(item => {
+
+                    const imageItem = document.createElement('div')
+                    imageItem.classList.add('item')
+                    imageItem.style.backgroundImage = `url('${item.links[0].href}')`
+                    results.appendChild(imageItem)
+
+                })
+
+                console.log(resultsArr.length)
+
             })
+            .catch((err) => console.log(err));
 
 
-        })
-        .catch((err) => console.log(err));
+    }
 
-},1000))
+
+
+},500))
+

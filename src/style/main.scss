@@ -25,7 +25,6 @@ body {
   &.searchActive {
     align-items: center;
     height: 30vh;
-
   }
 
   div.search {
@@ -49,9 +48,16 @@ body {
       &::placeholder {
         text-align: center;
         color: #000;
+
       }
 
-      &:focus {outline: none;}
+      &.searchActive::placeholder {
+        transition: opacity 300ms ease;
+      }
+
+      &:focus {
+        outline: none;
+      }
 
       &:focus::placeholder {opacity: 0;}
 
@@ -91,10 +97,6 @@ body {
   grid-gap: 30px;
   height: 50vh;
 
-  //@media (min-width: 500px) {
-  //  grid-gap: 40px;
-  //}
-
   @media (min-width: 600px) {
     grid-gap: 45px;
     grid-template-columns: 1fr 1fr;
@@ -116,14 +118,9 @@ body {
     width: 200px;
     height: 200px;
 
-    //@media (min-width: 500px) {
-    //  width: 220px;
-    //  height: 220px;
-    //}
-
     @media (min-width: 600px) {
-      width: 240px;
-      height: 240px;
+      width: 230px;
+      height: 230px;
     }
 
     @media (min-width: 960px) {
@@ -138,12 +135,12 @@ body {
   }
 }
 
-
 @keyframes fadeIn {
   from {
     transform: translateY(-50%);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
