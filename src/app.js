@@ -4,7 +4,6 @@ const searchInput = document.querySelector('.search-input')
 const searchInputBorder = document.querySelector('.search-input-border')
 const loader = document.querySelector('.lds')
 const results = document.querySelector('.results')
-const noResults = document.querySelector('.no-results')
 
 searchInput.addEventListener('keyup', () => {
     searchInput.value != '' ? searchInputBorder.classList.add('active') : searchInputBorder.classList.remove('active')
@@ -71,21 +70,25 @@ searchInput.addEventListener('keyup', debounce(e => {
 
                 loader.classList.remove('loading')
 
+                results.parentElement.classList.add('items-loaded');
 
+                if(resultsArr.length === 0){
+                    loader.innerHTML = '<span class="no-results">no results</span>';
+                    results.parentElement.classList.remove('items-loaded');
 
-                resultsArr.length === 0 ? noResults.textContent = 'no results' : '';
+                }
 
-// 100vh searchinput///
 
 
 
             })
             .catch((err) => console.log(err));
 
-        noResults.textContent = '';
+
 
     }
 
+    loader.innerHTML = '<div class="lds-ripple"><div></div><div></div></div>' // debounce after 1500ms
 
 },1000))
 
