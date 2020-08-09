@@ -11,15 +11,19 @@
 </head>
 <body>
     <div class="container">
-        <div class="searchContainer">
+        <div class="search-container">
             <div class="search">
-                <input type="text" class="searchInput" placeholder="search">
-                <label class="searchInputBorder"></label>
+                <input type="text" class="search-input" placeholder="search">
+                <label class="search-input-border"></label>
             </div>
         </div>
-        <div class="resultsContainer">
-            <div class="lds"><div class="lds-ripple"><div></div><div></div></div></div>
+        <div class="results-container">
+            <div class="lds">
+                <span class="no-results"></span>
+                <div class="lds-ripple"><div></div><div></div></div>
+            </div>
             <div class="results"></div>
+
         </div>
     </div>
     <script src="app.js"></script>

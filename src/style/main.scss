@@ -15,14 +15,14 @@ body {
   flex-direction: column;
 }
 
-.searchContainer {
+.search-container {
   height: 50vh;
   width: 100%;
   display: flex;
   align-items: flex-end;
   justify-content: center;
 
-  &.searchActive {
+  &.search-active {
     align-items: center;
     height: 25vh;
   }
@@ -33,8 +33,8 @@ body {
     width: 200px;
     transition-property: transform, opacity;
 
-    &.searchActive {
-      animation: 400ms ease fadeIn;
+    &.search-active {
+      animation: 400ms ease fade-in;
       transform: translateY(0);
     }
 
@@ -51,7 +51,7 @@ body {
 
       }
 
-      &.searchActive::placeholder {
+      &.search-active::placeholder {
         transition: opacity 300ms ease;
       }
 
@@ -91,40 +91,47 @@ body {
 }
 
 
-.resultsContainer {
-
-  .lds.searchActive {
-    width: 80px;
-    height: 80px;
+.results-container {
+  .lds {
     position: fixed;
     top: 50vh;
     left: 50vw;
     transform: translate(-50%, -50%);
 
-    * {
-      box-sizing: content-box;
+    .no-results {
+      font-size: 20px;
     }
 
-    .lds-ripple {
-
-      display: inline-block;
-      position: relative;
+    &.loading {
       width: 80px;
       height: 80px;
 
-      div {
-        position: absolute;
-        border: 4px solid black;
-        opacity: 1;
-        border-radius: 50%;
-        animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+      * {
+        box-sizing: content-box;
       }
 
-      div:nth-child(2) {
-        animation-delay: -0.5s;
+      .lds-ripple {
+
+        display: inline-block;
+        position: relative;
+        width: 80px;
+        height: 80px;
+
+        div {
+          position: absolute;
+          border: 4px solid black;
+          opacity: 1;
+          border-radius: 50%;
+          animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+        }
+
+        div:nth-child(2) {
+          animation-delay: -0.5s;
+        }
       }
     }
   }
+
 
   .results {
     display: grid;
@@ -172,7 +179,7 @@ body {
 
 
 
-@keyframes fadeIn {
+@keyframes fade-in {
   from {
     transform: translateY(-50%);
     opacity: 0;

@@ -1,9 +1,10 @@
-const searchContainer = document.querySelector('.searchContainer')
+const searchContainer = document.querySelector('.search-container')
 const search = document.querySelector('.search')
-const searchInput = document.querySelector('.searchInput')
-const searchInputBorder = document.querySelector('.searchInputBorder')
+const searchInput = document.querySelector('.search-input')
+const searchInputBorder = document.querySelector('.search-input-border')
 const loader = document.querySelector('.lds')
 const results = document.querySelector('.results')
+const noResults = document.querySelector('.no-results')
 
 searchInput.addEventListener('keyup', () => {
     searchInput.value != '' ? searchInputBorder.classList.add('active') : searchInputBorder.classList.remove('active')
@@ -26,26 +27,35 @@ const removeAllChildNodes = el => {
 }
 
 searchInput.addEventListener('focus', () => {
-    searchContainer.classList.add('searchActive')
-    search.classList.add('searchActive')
-    searchInput.classList.add('searchActive')
-    loader.classList.add('searchActive')
+    searchContainer.classList.add('search-active')
+    search.classList.add('search-active')
+    searchInput.classList.add('search-active')
 })
 
 const api = 'https://images-api.nasa.gov/'
+
+
+
 searchInput.addEventListener('keyup', debounce(e => {
+
+
 
     let resultsArr = new Array();
 
+    results.childNodes.length > 0 && searchInput.value.length > 0 ?  removeAllChildNodes(results) : '';
+
     if(searchInput.value.length > 0) {
+
+        loader.classList.add('loading');
+
+
         fetch(`${api}search?q=${searchInput.value}&media_type=image`)
             .then(response => response.json())
             .then(response => {
+
                 resultsArr = response.collection.items
 
-                console.log(resultsArr)
 
-                results.childNodes.length > 0 ? removeAllChildNodes(results) : '';
 
                 resultsArr.forEach(item => {
 
@@ -59,14 +69,23 @@ searchInput.addEventListener('keyup', debounce(e => {
 
 
 
+                loader.classList.remove('loading')
+
+
+
+                resultsArr.length === 0 ? noResults.textContent = 'no results' : '';
+
+// 100vh searchinput///
+
+
 
             })
             .catch((err) => console.log(err));
 
+        noResults.textContent = '';
 
     }
 
 
-
-},500))
+},1000))
 
